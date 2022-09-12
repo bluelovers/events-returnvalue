@@ -9,6 +9,7 @@ exports.EnumInternalEventName = void 0;
 (function (EnumInternalEventName) {
   EnumInternalEventName["newListener"] = "newListener";
   EnumInternalEventName["removeListener"] = "removeListener";
+  EnumInternalEventName["error"] = "error";
 })(exports.EnumInternalEventName || (exports.EnumInternalEventName = {}));
 
 class EventEmitter extends events.EventEmitter {

@@ -3,7 +3,7 @@ import { EventEmitter as e } from "events";
 var t;
 
 !function(e) {
-  e.newListener = "newListener", e.removeListener = "removeListener";
+  e.newListener = "newListener", e.removeListener = "removeListener", e.error = "error";
 }(t || (t = {}));
 
 class EventEmitter extends e {

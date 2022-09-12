@@ -21,8 +21,18 @@ export type ICacheEventInput<R extends any, E extends IEventName, T extends Reco
 export type ICacheEventRuntime<R extends any, E extends IEventName, T extends Record<any, any>> = ICacheEventCore<R, E> & T;
 export type IListener<R extends any, E extends IEventName, T extends Record<any, any>> = (cacheEvent: ICacheEventRuntime<R, E, T>, ...argv: any[]) => any;
 export declare const enum EnumInternalEventName {
+	/**
+	 * @see https://nodejs.org/api/events.html#event-newlistener
+	 */
 	newListener = "newListener",
-	removeListener = "removeListener"
+	/**
+	 * @see https://nodejs.org/api/events.html#event-newlistener
+	 */
+	removeListener = "removeListener",
+	/**
+	 * @see https://nodejs.org/api/events.html#capture-rejections-of-promises
+	 */
+	error = "error"
 }
 export declare class EventEmitter<E extends IEventName> extends EventEmitterNode {
 	on<R extends any, T extends Record<any, any> = Record<any, any>>(event: E[] | E, listener: IListener<R, E, T>): this;

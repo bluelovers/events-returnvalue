@@ -23,8 +23,19 @@ export type IListener<R extends any, E extends IEventName, T extends Record<any,
 
 export const enum EnumInternalEventName
 {
+	/**
+	 * @see https://nodejs.org/api/events.html#event-newlistener
+	 */
 	newListener = 'newListener',
+	/**
+	 * @see https://nodejs.org/api/events.html#event-newlistener
+	 */
 	removeListener = 'removeListener',
+
+	/**
+	 * @see https://nodejs.org/api/events.html#capture-rejections-of-promises
+	 */
+	error = 'error',
 }
 
 export class EventEmitter<E extends IEventName> extends EventEmitterNode
