@@ -3,21 +3,21 @@ import { ITSTypeAndStringLiteral } from 'ts-type';
 
 export type IEventName = string | symbol | ITSTypeAndStringLiteral<EnumInternalEventName>;
 
-export interface ICacheEventCore<R extends any, E extends string | symbol>
+export interface ICacheEventCore<R extends any, E extends IEventName>
 {
 	triggered: boolean,
 	name: E,
 	returnValue: R,
 }
 
-export type ICacheEventInput<R extends any, E extends string | symbol, T extends Record<any, any>> =
+export type ICacheEventInput<R extends any, E extends IEventName, T extends Record<any, any>> =
 	Partial<ICacheEventCore<R, E>>
 	& T;
-export type ICacheEventRuntime<R extends any, E extends string | symbol, T extends Record<any, any>> =
+export type ICacheEventRuntime<R extends any, E extends IEventName, T extends Record<any, any>> =
 	ICacheEventCore<R, E>
 	& T;
 
-export type IListener<R extends any, E extends string | symbol, T extends Record<any, any>> = (cacheEvent: ICacheEventRuntime<R, E, T>,
+export type IListener<R extends any, E extends IEventName, T extends Record<any, any>> = (cacheEvent: ICacheEventRuntime<R, E, T>,
 	...argv: any[]
 ) => any;
 
@@ -30,41 +30,41 @@ export const enum EnumInternalEventName
 export class EventEmitter<E extends IEventName> extends EventEmitterNode
 {
 	// @ts-ignore
-	public override on<R extends any, T extends Record<any, any>>(event: E[] | E, listener: IListener<R, E, T>)
+	public override on<R extends any, T extends Record<any, any> = Record<any, any>>(event: E[] | E, listener: IListener<R, E, T>)
 	{
 		[event].flat().forEach(event => super.on(event, listener))
 		return this;
 	}
 
 	// @ts-ignore
-	public override once<R extends any, T extends Record<any, any>>(event: E[] | E, listener: IListener<R, E, T>)
+	public override once<R extends any, T extends Record<any, any> = Record<any, any>>(event: E[] | E, listener: IListener<R, E, T>)
 	{
 		[event].flat().forEach(event => super.once(event, listener))
 		return this;
 	}
 
 	// @ts-ignore
-	public override addListener<R extends any, T extends Record<any, any>>(event: E[] | E, listener: IListener<R, E, T>)
+	public override addListener<R extends any, T extends Record<any, any> = Record<any, any>>(event: E[] | E, listener: IListener<R, E, T>)
 	{
 		return this.on(event, listener);
 	}
 
 	// @ts-ignore
-	public override off<R extends any, T extends Record<any, any>>(event: E[] | E, listener: IListener<R, E, T>)
+	public override off<R extends any, T extends Record<any, any> = Record<any, any>>(event: E[] | E, listener: IListener<R, E, T>)
 	{
 		[event].flat().forEach(event => super.off(event, listener))
 		return this;
 	}
 
 	// @ts-ignore
-	public override removeListener<R extends any, T extends Record<any, any>>(event: E[] | E,
+	public override removeListener<R extends any, T extends Record<any, any> = Record<any, any>>(event: E[] | E,
 		listener: IListener<R, E, T>,
 	)
 	{
 		return this.off(event, listener);
 	}
 
-	protected _emit<R extends any, T extends Record<any, any>>(event: E,
+	protected _emit<R extends any, T extends Record<any, any> = Record<any, any>>(event: E,
 		cacheEvent: ICacheEventInput<R, E, T>,
 		argv: any[],
 	)
@@ -101,7 +101,7 @@ export class EventEmitter<E extends IEventName> extends EventEmitterNode
 	}
 }
 
-export function _createCacheEvent<R extends any, E extends string | symbol, T extends Record<any, any>>(event: E,
+export function _createCacheEvent<R extends any, E extends IEventName, T extends Record<any, any>>(event: E,
 	cacheEvent: ICacheEventInput<R, E, T>,
 ): ICacheEventRuntime<R, E, T>
 {
@@ -115,7 +115,7 @@ export function _createCacheEvent<R extends any, E extends string | symbol, T ex
 	return cacheEvent as any
 }
 
-export function _emitArgv<R extends any, E extends string | symbol, T extends Record<any, any>>(event: E,
+export function _emitArgv<R extends any, E extends IEventName, T extends Record<any, any>>(event: E,
 	cacheEvent: ICacheEventInput<R, E, T>,
 	argv: any[],
 )
