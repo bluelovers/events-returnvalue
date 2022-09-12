@@ -12,7 +12,6 @@ test(`demo`, () =>
 	});
 
 	let actual = ev.emit('test');
-	;
 
 	expect(actual).toMatchSnapshot();
 

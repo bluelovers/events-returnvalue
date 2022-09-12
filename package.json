@@ -50,8 +50,8 @@
     "posttest": "yarn run build",
     "install:frozenLockfile": "yarn-tool install --frozen-lockfile",
     "install:resetLockfile": "yarn-tool install --reset-lockfile",
-    "build": "yarn run build:tsdx && yarn run build:dts:tsc",
-    "build:dts:bundle": "ynpx dts-bundle-generator -o ./dist/index.d.ts ./src/index.ts --no-banner --inline-declare-global & echo build:dts:bundle",
+    "build": "yarn run build:tsdx && yarn run build:dts:bundle",
+    "build:dts:bundle": "ynpx dts-bundle-generator -o ./dist/index.d.ts ./src/index.ts --no-banner --inline-declare-global --external-inlines ts-type --external-types node & echo build:dts:bundle",
     "build:dts:copy": "copy .\\src\\index.d.ts .\\dist\\index.d.ts & echo build:dts",
     "build:dts:tsc": "yarn run build:dts:tsc:emit && yarn run build:dts:copy",
     "build:dts:tsc:emit": "tsc --emitDeclarationOnly --declaration --noEmit false",
@@ -87,7 +87,8 @@
   "devDependencies": {
     "@bluelovers/tsconfig": "^1.0.30",
     "@types/jest": "^29.0.1",
-    "@types/node": "^18.7.16"
+    "@types/node": "^18.7.16",
+    "ts-type": "^2.1.10"
   },
   "packageManager": "yarn@1.22.19"
 }
