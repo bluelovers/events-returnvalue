@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.2](https://github.com/bluelovers/events-returnvalue/compare/events-returnvalue@2.0.1...events-returnvalue@2.0.2) (2022-09-12)
+
+
+
+### 🔖　Miscellaneous
+
+* . ([6bb6e8a](https://github.com/bluelovers/events-returnvalue/commit/6bb6e8a2f483c173da42cac951d93569c73a86ed))
+
+
+
 ## 2.0.1 (2022-09-12)
 
 
